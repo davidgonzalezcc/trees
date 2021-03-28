@@ -8,7 +8,7 @@ public:
     nodo *izq;
     nodo *der;
     
-        nodo(char d) { //Constructor
+        nodo(T d) { //Constructor
             dato = d;
             izq = der = nullptr;
                    }
