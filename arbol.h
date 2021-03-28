@@ -24,23 +24,27 @@ template <class A>
 void arbolBin<A>::insertar(nodo<A> *& raiz, int dato)
 {
     nodo<A> *nuevo_nodo = new nodo<A>(dato);
-    
+    nodo<A> *padre = nullptr;
     if(estaVacio()){
         raiz = nuevo_nodo;
         ++nodos;
         return;
     }
-    else
-    {
-        int valorRaiz = raiz->dato;
-        if( dato < valorRaiz){
-            insertar(raiz->izq,dato);
-        }
-        else{
-            insertar(raiz->der,dato);
-        }
+
+    nodo<A> *enUso = raiz;
+    while(enUso){
+        padre = enUso;
+        enUso = nuevo_nodo->dato > enUso->dato ? enUso->der : enUso->izq;
     }
-    nodos++;
+
+    if(nuevo_nodo->dato < padre->dato)
+    padre->izq = nuevo_nodo;
+    else
+    padre->der = nuevo_nodo;
+    
+    
+    
+    ++nodos;
 }
 
 template <class A>
